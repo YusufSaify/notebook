@@ -1,0 +1,155 @@
+
+
+<body>
+    <div class="body">
+        <div class="box">
+            <h2>signup</h2>
+            <div class="massage"></div>
+           <form method="post" action="/signup" >
+            <input id="name" name="username" type="text" placeholder="Enter your name">
+            <input id="email" name="email" type="email" placeholder="Enter your email">
+            <input id="password" name="password" type="password" placeholder="Enter your password">
+            <input class="btn" type="submit" value="signup">
+           </form>
+
+          
+            <a href="/login">login</a>
+           
+        </div>
+    </div>
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: monospace;
+    }
+
+    :root {
+        --clr1: #3690db91;
+    }
+
+    a {
+        color: rgb(87, 87, 87);
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    body {
+
+        box-shadow: inset 0px -20px 100px 410px rgb(0, 0, 0);
+        animation: show 3s 1s ease forwards;
+        background: rgb(22, 22, 22);
+
+
+    }
+
+    @keyframes show {
+
+        to {
+            /* box-shadow: inset 0px 0px 0px 0px  red; */
+
+            box-shadow: inset 0px -60px 620px 90px black;
+
+        }
+    }
+
+    .massage {
+        font-size: 20px;
+        top: -7%;
+        padding: 10px 30px;
+        background: #181818;
+        transition: .4s;
+        position: absolute;
+        text-align: center;
+        border-radius: 50px;
+        margin-bottom: 10px;
+        color: red;
+        text-align: center;
+        margin-bottom: 10px;
+        color: red;
+    }
+
+    .show{
+        top: 6%;
+    }
+
+    .body {
+        background: url("file:///C:/Users/User/Downloads/New%20Project%20(1).png");
+        background-position: center;
+        /* filter: invert(1); */
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .box {
+        display: flex;
+        box-shadow: 3px 3px 0px var(--clr1), 0px 0px 140px 10px black;
+        align-items: center;
+        background-color: rgb(30, 30, 30);
+        justify-content: center;
+        flex-direction: column;
+        width: 300px;
+
+        height: 350px;
+        padding: 40px 30px;
+        border-radius: 20px;
+    }
+
+
+    h2 {
+        color: blanchedalmond;
+        text-shadow: 3px 0px 0px var(--clr1);
+
+        /* background-color: red; */
+        font-size: 46px;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: 100%;
+        color: whitesmoke;
+        font-size: 22px;
+        border-radius: 6px;
+        padding: 5px 10px;
+        height: 45px;
+        background-color: transparent;
+        border: 1px solid rgb(82, 82, 82);
+        margin-bottom: 10px;
+        outline: none;
+    }
+    form{
+        /* width:min-content; */
+    }
+
+    .btn {
+        height: 45px;
+        margin-top: 10px;
+        /* width: 260px; */
+        font-size: 20px;
+        border-radius: 6px;
+
+        box-shadow: 2px 2px 3px 0px #0000006b;
+        background-color: var(--clr1);
+        /* border: 1px solid rgb(82, 82, 82); */
+
+
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+
+    button:hover.box {
+        background-color: red;
+    }
+</style>
+

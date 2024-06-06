@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Lustria&family=Phudu:wght@300;400&display=swap"
+        rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script> -->
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit note</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="functions">
+            <button class="close-pop-btn" onclick="goto('/profile')">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACDklEQVR4nO3XO2gUQRzH8c8FH4UIgqCiotiaIqiViIXYKypaCWJpJ1oI4gPENCJItLBKobHW0kY7QRAhoI0PoiC+0Ebx/TwZmINh2b1LyN5lV/YLU+zt3czvu/ef2RkaGhoaGirCEMbwGaNqGH4c7di+qxEtXE7Cd1qtw7fVPHxbzWq+nXNdqyc/HqUqL9DqEl7VBVo9wldaYKig5tPwMvev4RT2YIUahA/87LIqPcEFbFDR8OJW4k8XiU57gENYqELhOyzGMHbiDG7iY4HIS+yP86sS4YsIT3oHJgpkbmFlmQIXSwyf9w8dwevMGO+xvaQxfMpMvnnKJ4icw+9krB/YW/V/IMs2vEnGCkK7qjYHerEaT5OxwqFo01xJrMIItsQQoa2PJdONNXiejPUMiwYtMdFj/Q8r0CQuxVpfnvn9SDzNdb4fXnwGKZFOyOm2OziA+bGPo5n5MDxIifT+Y9zHQ0zFuu4mMoV9sc/J5POrZQhMV6LXbjSUzFacwO24bGZFbuBgcv0LawclMdPt9FIcxoucjd+H5PpYWQK9JGYq0GEBjuNbQXndU5Mz8Ua8yhH4G5fnvkvMViCwDm9z+gu7W4OUmA2bc5bk0/pEkcRsGcv0d10fyUp8KaHPZZlJfVefCRLn477+ZEl9XkkEHqkhuxOBd2rIkvgmDgJf1ZTReEI8O9dBGhoaGv5D/gGK202BKeC1ugAAAABJRU5ErkJggg==">
+            </button>
+            <button class="close-pop-btn" onclick="savenote('<%= note._id%>')">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABq0lEQVR4nO2Zy0oDMRSGP6HMRjd20WUVwUcQ97UWLfoa4qO4cWmxD+I7aH0CQbx1pasqClaLkYEIsczEmclFLeeDs2jCufyZ0yTMgCAIwl9nGegDQ2ACKI/2BhwBtVDFd4Anz0Vn2QmwEGLlYxSvtJ0DDZ8C+kbwK6AFJHrOTFyFPBGXwKovAUMjcMtSQBVM/z3g3fj9AKx7qP/bHzaxFFCFaf9d4MUYewZ2HOu3FulbQMoacG+Mpwu4zz8SkLICXEzNHwBzVMBW5NiYq5eMWzd8XzPmG3pHMvMf+hYw8LR1nuXkntdng02ok4Bt4MOx+NR/y5K/5tqqPzmnIk6n2qmIjbWfrfiiNYRz9oQSAcgTcEJJCzGjLdTVh1nZLTRvWx3obTmKgI6HQyzPujEE+LpGFLlaBBFgts0i7tQtd54gAkKc0CpELhFQAiVPIANpoRIoaaFZbKFJzoutWAISYyytpTR3Oa8WYwloG2M3VYIeGwGudcAkgoAE2NQ5v8Z6VYIuAY8BL25FbQQ0q65M+5dFjIANHGnqR3gb4BOTyrCJztVzWXlBEASi8AmTfUxM4DihFwAAAABJRU5ErkJggg=="></button>
+            <button class="close-pop-btn" onclick="downloadnote()">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABn0lEQVR4nO2YT04CMRSHPzdzDEAT4lZIvICDHsiFia7Y4BEQTsF50CiCW42iCzeTjKkpyXNScDodp4P0S17Sgfb1/fr6ZzoQCAQC/5VDYAE8Am22kCsg1XbJFtIXAlR56+gHAZ4JGfBNyIBvQgbKogWMgScgEXu7tE9gYJGBa90mNVii+xoBTdfgz4D3NR1l7SOngD1dN4/PJdBzGfm8wdtmYLAhA6lBRKOIgLFw8gCcAFEFizgCYmAm2t8UiP97Hq4cqOCr3oVi0X5eoP2PBWsz8mUJiDIL2xo5D32dA6lLDDsj4AC4A+6Bbg4BXV1Xzet2HQSci3ovQoRJQFfXWf1+UQcBrUxQqtwxCOgY6u3XQYBpZFV5Ip4nhv/ldPMuQHEEPOc4WV+B4z+KwbnxbyJsgve2ja4TYRu813MgK6JI8N4PMrVIb4FpzgVbOwFlkO60gMTxbdSVyPVtdOF4H3ClJ/pXn+itGQkHM+2wikxEwGnmRjYs4qip76OpZ3sreidGj/rSc/AxjjR0CucbvguVaYnua+gy8oFAIEAlfAG3TJLaWbXlEAAAAABJRU5ErkJggg=="></button>
+            <button class="close-pop-btn" onclick="savefullnote()">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABbElEQVR4nO2ZzUrEMBDHf7tgUV/Sh1jEj0O1C3rXg7f1ZXT1HXTfooeyUIgUcghlW5PmY9Nl/jCXMs3Mr0MmYQoikegkdQmsgR3QAsqwlfa5AKoBHxvbAy/AMkby3wNBt8BCJ/85IelDtgkNsR4JdqV9qkDJqxgQO2PhO6D4x+caOHOMERWiNRYtPHzGFLUSyjAfH9sYm9AQqQEWwFvv2bsPRGoAQkMcAyAoxLEAgkGkABjrYkvfjZ0CwDxHbkJDpAB4nHhiv+YCMPUutc8FoNM5UAK/jrfZbABcJAB9SQUcpWQPOH6RZ6BxbJEN8JRDBbr7TD3xoKpzAEB/ydlWIIaUAPQkFTiVNtqMbNzZtNE6NwCXNtrkWIEYUgIwpwq0CYa7LiqMWF1cp5HHvcV4/dBYJJQK4NaI9WPzUmXxg2PqWMTXStuRx3Zgga8Iv5iUpX3oSYaVugQfBkYeK8+xiIu1ev3SJXmRSMR89AdpSmE7jaD2mQAAAABJRU5ErkJggg=="></button>
+            <button class="close-pop-btn" onclick="savefullnote()">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACwUlEQVR4nO2Y3YtNURjGf+ZwxmdRrsS1j8kVhTvDjYxSlCaUSzeuTDNcyfiomQsNSf4AIkpKyUcUhTsljc6ZSGKEYZzxceHCoFVr1dNq79n7zNl7Zh3tp9bFPOvrfc6877vfd0GBAgUK/K/oAJ4Az4F+oJUmwkFgHPgr4yxNgBZgwDPcjVqdZ80EbgJjwC6mAMZFrnhGP/D+rgcrZN9nYD45YmGEsVetqMkKKAGvZO/hnGxnCfDMM/SMdScaEGCwT/Z+ARaQMVYDw3LJH6DLW5NWwHbr77eA2fJfGJL9PVka324vdIf/Ajoj1qUVcF3W7Rd+r/CVrIzvtAa7g8esIBoQcEDWDYkLmjgalbk1Ex0yB+i1wfM7Jh36Y9i6Eg0KmGf93K3dJnPnhR+YyPhHKY12YxBYlmBYPUF8QtZeFH6D8G/jNvfWYfi4/cgsSmFUlADjFneBj8AW4Vd6blm2/Azgg8wtjbpIc243MItsECVgrXBVa6DDoMxtjgnyHVEXqc875XkJmAv8FN64iMOpmLTZI3x/2ovyEmBwSfjjwu8W/rLw7cLfCEHATuFNPDisEv5pTG30OAQBaugb4RcL/zqGr4YgwFSXjv8mfMmWJH4JXpIeYyQ0Ad+9PsAJ+Boj4FMIAtoacKFKaEF8J0UQLw8tiDWNHkuRRjcmpdGp/pD9EH59ig9Zt/B9SaXEoQxFJJUSFa+UeCFzm4S/llRKHPUuy7OYMz/OPZsOt8b4f837Ed8nFXMhlNMnZe0F4dcJ/26iA0wvegR4OU0NzaisNS97DufSNDQhtZRVaSnLXqdm4qepmvo9SR+wkJ5VasBt71mlGpNWM0NTP2w5mHT6sFmfFh1ardFZPe62yb6RvB93HYzbnI5Jt1oap0EZuG9756jkkCu6pKZ3wwibDFqYJnTYsrdqXxGyLBALFChQgDDwD99v652tWKj3AAAAAElFTkSuQmCC"></button>
+            <button class="close-pop-btn" onclick="delfullnote()">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACcElEQVR4nO2Zv48NURTHP7awIUFhPRWhICqroiO6rQgifkRiI6JGItnVSPDEjyjwFxCNjY6KQlidHyFUHg27Gr9jNy+7xJOT3Em+mTCZee/cyZD5JKc6J99zzrz77txzB2pqarxZCpwGngNTwZ4Bp4AGFWcH8A3o/MW+AtupcPE/M4pPzGK2UcFl80WKfAXsBAaAJcAuoCX+T1VbTieluFYoOo0V/FriTlAhnkphezPi9knc45gFnQHaOdZzWdYGmnmLnwN8r0DRnZRZTblp/su/QJqtInSL+NyWfFs8BDeI4CPi80TyrfcQXC6CE8RnUvIt8xCcC/wKgj+APuLRF3J0Qk7L7cJHeSqNyG/0TrAPnsIvRHgwI+5i2DHOF/QlDEoey+nGHREeyoibCTEzBX0JQ5LHcrpxTYSHM+J07y7iSzggMVdx5JwIj0Zs4LjEnMWRIyJ8KWIDVyTmMI7sFuGxiA3clBibIdzYJMLjERt4KDEbcWS1CNtQEquBNxKzCkcWivB0xAamJWYBzkzlEO+lgUXit1zu6DxrS8q7gTWpudqdcUlgf2rvBjaL/wERGJMEtq16N7BH/DeIwOUcL5leGjia82XZNaOSwI4W3g1cEP8IERiWBHa4827guvj3E4E8R93kJqNd0GfczXlk75o8w0Yz3N80C/qMlzmHpq5pSAIbMb35LPp/ult1GbhnZeDud9TuL+viYEKe0gpH3ZVlXd3cl0QHHXUPie49IjKS+khhn4vm9aA3P3zZ0fV/jIjYsfpdak/3tLcxjtFp1gHvIxQ/CaylJAbCcaIlO1M3Nhu+p9kNxOKyiq+p+Z/4DZX67xAFcCDaAAAAAElFTkSuQmCC"></button>
+            <button class="close-pop-btn" onclick="delfullnote()">
+                <img width="96" height="96" src="https://img.icons8.com/material-outlined/96/like--v1.png"
+                    alt="like--v1" /></button>
+
+        </div>
+        <div class="text" style="height:auto">
+            <div class="titlediv">
+                <textarea spellcheck="false" class="title input" name="title"><%= note.title.trim() %>
+                </textarea>
+
+            </div>
+            <div class="descriptiondiv">
+                <textarea spellcheck="false" class="description input" name="description"><%= note.description.trim()%>
+                </textarea>
+
+            </div>
+        </div>
+        <div class="videos"></div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function goto(link) {
+        window.location.href = link
+    }
+
+
+    const title = document.querySelector(".title");
+    const description = document.querySelector(".description");
+
+    function savenote(id) {
+
+        axios.post(`/updatenote/${id}`, { title: title.value, description: description.value }).then(response => {
+            // document.getElementById(noteId).style.display = "none";
+            // // Handle successful response
+            // // prompt("Note deleted successfully:", response.data);
+            console.log("done ")
+            // // Optionally, perform additional actions after deletion
+        })
+            .catch(error => {
+                // Handle error
+                console.error("Error deleting note:", error);
+            });
+    }
+
+    function downloadnote() {
+        const note = document.querySelector('.text'); // Select the div you want to convert
+        const text1 = note.querySelector(".title").value.toUpperCase();
+        const text2 = note.querySelector(".description").value;
+
+        // Create a document definition
+        const styles = {
+
+            header: {
+                pageOrientation: 'landscape', // 'portrait' or 'landscape'
+                pageSize: 'A4', // See available page sizes
+                pageMargins: [40, 60], // Margin: [left, top, right, bottom]
+                fontSize: 18,
+                bold: true,
+                margin: [0, 0, 0, 10], // Margin: [left, top, right, bottom]
+                border: [false, false, false, true],
+            },
+            body: {
+                pageOrientation: 'landscape', // 'portrait' or 'landscape'
+                pageSize: 'A4', // See available page sizes
+                pageMargins: [40, 60], // Margin: [left, top, right, bottom]
+                fontSize: 12,
+                lineHeight: 1.2,
+                color: 'grey'
+            },
+            defaultStyle: {
+                border: '1px solid #000', // Border style for all elements
+            },
+
+        };
+
+        // Create a document definition
+        const docDefinition = {
+            content: [
+
+                {
+                    text: text1,
+                    style: 'header', // Use the 'header' style for headings
+                    margin: [0, 10], // Add some space below the heading
+                    border: [false, false, false, true],
+
+                },
+                {
+                    text: text2,
+                    style: 'body',
+                    margin: [0, 10],
+                    alignment: 'justify',
+                }
+            ],
+            styles: styles, // Define the custom styles
+        };
+
+
+        // Create a PDF document
+        const pdfDoc = pdfMake.createPdf(docDefinition);
+
+        // Open the PDF in a new window
+
+        pdfDoc.open();
+
+    }
+
+
+</script>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    body {
+        /* background-color: red; */
+        box-sizing: border-box;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        overflow: hidden;
+        width: 100vw;
+        /* background-color: yellow; */
+
+    }
+
+    .functions {
+        /* background-color: rgb(255, 255, 255); */
+        height: 100vh;
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .functions button {
+        border: none;
+        margin-bottom: 20px;
+        align-content: center;
+        padding: 24px;
+        cursor: pointer;
+        text-align: center;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #dcdcdc96;
+        border-radius: 50%;
+        transition: ease;
+        /* box-shadow: 3px 2px 5px #e2e2e2, -3px -2px 5px white; */
+        background-color: white;
+        box-shadow: 3px 2px 5px #a6a6a6, -3px -2px 5px white;
+        background-color: white;
+    }
+
+    .functions button:active {
+        transform: scale(1.03);
+    }
+
+    .functions img {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        opacity: 0.2;
+        /* border: 2px solid rgb(173, 173, 173); */
+        background-color: transparent;
+        border-radius: 50%;
+    }
+
+    body {
+        background-color: #d7e1e9;
+    }
+
+
+
+    .text {
+        /* background-color: rgb(255, 255, 255); */
+        --dot-bg: rgb(255, 255, 255);
+        --dot-color: rgb(195, 195, 195);
+        --dot-size: 1px;
+        --dot-space: 12px;
+        background:
+            linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+            linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+            var(--dot-color);
+        /* border: 2px solid rgb(221, 148, 148); */
+        /* height: 100vh;    */
+        padding: 20px;
+        margin: 20px 0px;
+        border-radius: 20px;
+        width: 595px;
+        overflow-y: visible;
+
+
+    }
+
+
+    .text textarea {
+        width: 100%;
+
+    }
+
+    .title {
+        /* background-color: red; */
+        height: auto;
+    }
+
+    .titlediv textarea {
+        outline: none;
+        font-size: 30px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid rgb(213, 116, 116);
+        width: 100%;
+        /* height: 80px;/ */
+        color: #1c1c1c;
+        border-radius: 0px;
+        padding-left: 10px;
+        text-transform: uppercase;
+        /* text-shadow: 1px 1px 2px #8d8d8d; */
+        overflow-y: hidden;
+        font-family: monospace;
+        padding-top: 20px;
+        resize: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+        /* height: 4px; */
+        /* Width of the scrollbar */
+    }
+
+    /* Track (the area on which the thumb rests) */
+    ::-webkit-scrollbar-track {
+        background: #e2e2e2;
+        /* Background color of the track */
+    }
+
+    /* Handle (the draggable part of the scrollbar) */
+    ::-webkit-scrollbar-thumb {
+        background: #c8c8c8;
+        /* Color of the thumb */
+        border-radius: 6px;
+        /* Round the corners of the thumb */
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        height: 6px;
+        /* Color of the thumb on hover */
+    }
+
+
+    .descriptiondiv textarea {
+        text-align: left;
+        outline: none;
+        resize: none;
+        overflow-y: auto;
+        height: 470px;
+        font-size: 16px;
+        border: none;
+        background-color: transparent;
+
+        font-family: 'emoji';
+        /* text-shadow: 1px 1px 1px #0000001c; */
+        /* background-color: red; */
+        padding: 10px;
+        color: #5a5a5a;
+        /* font-family: 'Caveat', cursive; */
+        overflow: visible;
+        text-transform: capitalize;
+    }
+
+    .videos {
+        background-color: rgb(34, 255, 0);
+        height: 100vh;
+        /* width: calc(60% - 80px); */
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+
+
+<script>
+
+
+
+
+    // console.log(window)
+
+
+
+    // console.log(noteid.noteid)
+
+</script>
+
+
+</html>

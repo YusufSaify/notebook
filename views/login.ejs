@@ -1,0 +1,172 @@
+
+<body>
+    <div class="body">
+
+        <div class="box">
+            <h2>login</h2>
+            <div class="massage">Please Login with correct credentials</div>
+           <form action="/login" method="post">
+            <input id="email" name="email" type="email" placeholder="Enter your email">
+            <input id="password" name="password" type="password" placeholder="Enter your password">
+            <input class="btn" type="submit" value="login">
+           </form>
+            <a href="/signup">signup</a>
+        </div>
+
+    </div>
+
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: monospace;
+
+    }
+
+    .massage {
+        font-size: 20px;
+        top: -7%;
+        padding: 10px 30px;
+        background: #181818;
+        transition: .4s;
+        position: absolute;
+        text-align: center;
+        border-radius: 50px;
+        margin-bottom: 10px;
+        color: red;
+        text-align: center;
+        margin-bottom: 10px;
+        color: red;
+    }
+
+    .show {
+        top: 6%;
+        transition: .4s;
+    }
+
+    :root {
+        --clr1: #3690db91;
+    }
+
+    a {
+        color: rgb(87, 87, 87);
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* background: linear-gradient(#161616,black,black); */
+    body {
+
+        box-shadow: inset 0px -20px 100px 410px rgb(0, 0, 0);
+        animation: show 3s 1s ease forwards;
+        background: rgb(22, 22, 22);
+
+
+    }
+
+    @keyframes show {
+
+        to {
+            /* box-shadow: inset 0px 0px 0px 0px  red; */
+
+            box-shadow: inset 0px -60px 620px 90px black;
+
+        }
+    }
+
+    .body {
+        background: url("file:///C:/Users/User/Downloads/New%20Project%20(1).png");
+        background-position: center;
+        /* backdrop-filter:brightness(2); */
+        display: flex;
+        backdrop-filter:brightness(1);
+        align-items: center;
+        opacity: 1;
+        justify-content: center;
+        height: 100vh;
+        transition:  10s ease-in;
+        overflow: hidden;
+    }
+
+
+    .box {
+        display: flex;
+        box-shadow: 3px 3px 0px var(--clr1), 0px 0px 140px 10px black;
+        align-items: center;
+        background-color: rgb(30, 30, 30);
+        justify-content: center;
+        flex-direction: column;
+        width: 300px;
+
+        height: 350px;
+        padding: 40px 30px;
+        border-radius: 20px;
+    }
+
+
+
+    h2 {
+        color: blanchedalmond;
+        text-shadow: 3px 0px 0px var(--clr1);
+        text-transform: capitalize;
+
+        /* background-color: red; */
+        font-size: 46px;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: 100%;
+        color: whitesmoke;
+        font-size: 22px;
+        border-radius: 6px;
+        padding: 5px 10px;
+        height: 45px;
+        background-color: transparent;
+        border: 1px solid rgb(82, 82, 82);
+        margin-bottom: 10px;
+        outline: none;
+    }
+    form{
+        /* width: min-content; */
+    }
+
+    .btn {
+        height: 45px;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 20px;
+        border-radius: 6px;
+
+        background-color: var(--clr1);
+
+        /* box-shadow: inset -56px 0px 69px #000000a3, inset 58px 0px 36px #ffffff59; */
+
+
+
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: .2s;
+        box-shadow: inset -56px 0px 69px #000000a3,
+            inset 58px 0px 36px #ffffff59,
+            2px 2px 10px rgba(0, 0, 0, 0.376);
+    }
+
+    button:hover{
+/* background-color: red; */
+        filter:brightness(2);
+    }
+
+
+    button:hover.box {
+        background-color: red;
+    }
+</style>
+
+</html>
