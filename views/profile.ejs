@@ -41,9 +41,9 @@
             <!-- <h2 style="color: white;">inotes</h2> -->
         </div>
         <div class="searchbar">
-            <form id="inputform" placeholder="Type your note here...." style="display: contents;" action="/addnote" method="post">
+            <form id="inputform"  action="/addnote" method="post">
 
-                <input spellcheck="false" name="title" class="search" type="text">
+                <input spellcheck="false" placeholder="Welcome, <%= username %>!" name="title" class="search" type="text">
                 <input id="addnote" type="submit" hidden>
             </form>
             <button onclick="addnote()">
@@ -120,7 +120,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    console.log("hello yusuf")
+    console.log(`Hello ${-username}`)
     function delnote(noteId) {
         axios.post(`/deletenote/${noteId}`)
             .then(response => {
@@ -567,7 +567,7 @@
 
         font-family: "Pixelify Sans", sans-sea;
         border: none;
-        width: 60%;
+        /* width: 60%; */
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
         height: 50px;
