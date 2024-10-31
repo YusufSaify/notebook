@@ -80,7 +80,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     if (userfound) {
         const reversedNotes = userfound.notes.reverse(); // Reversing the array
         // console.log(reversedNotes);
-        res.render('profile', { notes: reversedNotes });
+        res.render('profile', { notes: reversedNotes ,username: userfound.username});
     }
 });
 
